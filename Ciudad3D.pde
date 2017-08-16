@@ -1,6 +1,6 @@
 import peasy.*;
 
-String version = "0.0.1";
+String version = "0.0.2";
 
 int cuadraAncho = 40;
 int cuadraAlto = 40;
@@ -12,7 +12,13 @@ PeasyCam cam;
 Suelo suelo;
 ArrayList <Calle> calles;
 
+ArrayList <Cuadra> cuadras;
+
 int distancia = 1000;
+
+float camX = 1;
+float camY = 0.5;
+float camZ = 0;
 
 void setup() {
   size(600,600,P3D);
@@ -24,8 +30,10 @@ void setup() {
   suelo = new Suelo(0,0,0);
   
   // + 1 para cerrar
-  int totalX = distancia/(cuadraAncho+cuadraSeparador)+1;
+  int totalX = distancia/(cuadraAncho+cuadraSeparador);
+  int totalY = distancia/(cuadraAlto+cuadraSeparador);
   
+  //println("totalX: " + totalX +" totalY: " + totalY);
   calles = new ArrayList<Calle>();
   int posZ = 2;
   
@@ -40,11 +48,30 @@ void setup() {
     calles.add(miCalle2);
   }
   
+  //Cuadras
+  translate(cuadraSeparador,cuadraSeparador);
+  cuadras = new ArrayList<Cuadra>();
+  int indice = 0;
+  int iniX = -distancia/2+cuadraAncho/2+cuadraSeparador/2;
+  int iniY = -distancia/2+cuadraAlto/2+cuadraSeparador/2;
+  //println(iniX);
+  for(int i = 0;i<totalX;i++){
+    int posX = iniX+(cuadraAncho+cuadraSeparador)*i;
+    for(int j = 0;j<totalY;j++){
+      int posY = iniY+(cuadraAlto+cuadraSeparador)*j;
+      Cuadra miCuadra = new Cuadra(indice,posX,posY,posZ);
+      cuadras.add(miCuadra);    
+      indice++;
+    }
+    indice++;
+  }  
+ 
+  rotateX(camX);
+  rotateY(camY);
 }
 
 void draw() {
-  //rotateX(-.5);
-  //rotateY(-.5);
+  camara();
   //background(255,255,0);
   background(255);
   lights();
@@ -53,7 +80,16 @@ void draw() {
     Calle miCalle = (Calle)calles.get(i);  
     miCalle.draw();
     //println(miCalle.toString());
-  }  
-  saveFrame("frames/"+version+"/"+version+"####.tif");  
-
+  } 
+  for(int i = 0;i<cuadras.size();i++){
+    Cuadra miCuadra = (Cuadra)cuadras.get(i);  
+    miCuadra.draw();
+  }
+  //saveFrame("frames/"+version+"/"+version+"####.tif");  
+}
+void camara(){
+  rotateX(camX);
+  rotateY(camY);
+  camZ-=0.005;
+  rotateZ(camZ);
 }

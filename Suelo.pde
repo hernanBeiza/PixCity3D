@@ -22,7 +22,7 @@ class Suelo extends Elemento {
     pushMatrix();
     translate(this.x,this.y,this.z);
     super.draw();
-    fill(255);
+    fill(0);
     stroke(0);
     //noStroke();
     //rotateX(radians(90));

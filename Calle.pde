@@ -22,17 +22,19 @@ class Calle extends Elemento {
     this.w = 10;
     this.h = distancia;
     this.d = 2;
+    
+    
   }
   
   void draw() {
     pushMatrix();
     translate(this.x,this.y,this.z);
-    super.draw();
+    //super.draw();
     if(this.direccion=="h"){
       rotate(radians(-90));
     }
 
-    fill(0);
+    fill(255,255,0);
     noStroke();
     box(w,h,d);      
     popMatrix();
