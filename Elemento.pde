@@ -4,8 +4,10 @@ class Elemento{
   PVector miVectorY;
   PVector miVectorZ;
   
-  int largo = 300;
+  int largo = 100;
 
+  color miColor = color(0);
+  
   Elemento(){
     //distancia, variable en main
     largo += distancia;

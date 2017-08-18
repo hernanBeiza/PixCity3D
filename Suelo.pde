@@ -8,6 +8,8 @@ class Suelo extends Elemento {
   
   Suelo(int x, int y, int z){
     super();
+    this.miColor = color(0,0,0);
+    
     this.x = x;
     this.y = y;
     this.z = z;
@@ -22,10 +24,11 @@ class Suelo extends Elemento {
     pushMatrix();
     translate(this.x,this.y,this.z);
     super.draw();
-    fill(0);
-    stroke(0);
     //noStroke();
-    //rotateX(radians(90));
+    //fill(miColor);
+    noFill();
+    stroke(miColor);
+
     box(w,h,d);      
     popMatrix();
   }

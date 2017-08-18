@@ -1,6 +1,6 @@
 import peasy.*;
 
-String version = "0.0.2";
+String version = "0.0.3";
 
 int cuadraAncho = 40;
 int cuadraAlto = 40;
@@ -25,11 +25,10 @@ void setup() {
   
   cam = new PeasyCam(this, distancia);
   cam.setMinimumDistance(10);
-  cam.setMaximumDistance(2000);
+  cam.setMaximumDistance(4000);
   
   suelo = new Suelo(0,0,0);
   
-  // + 1 para cerrar
   int totalX = distancia/(cuadraAncho+cuadraSeparador);
   int totalY = distancia/(cuadraAlto+cuadraSeparador);
   
@@ -66,30 +65,35 @@ void setup() {
     indice++;
   }  
  
-  rotateX(camX);
-  rotateY(camY);
 }
 
 void draw() {
-  camara();
-  //background(255,255,0);
   background(255);
   lights();
+  camara();
   suelo.draw();
   for(int i = 0;i<calles.size();i++){
     Calle miCalle = (Calle)calles.get(i);  
     miCalle.draw();
-    //println(miCalle.toString());
   } 
   for(int i = 0;i<cuadras.size();i++){
     Cuadra miCuadra = (Cuadra)cuadras.get(i);  
     miCuadra.draw();
   }
-  //saveFrame("frames/"+version+"/"+version+"####.tif");  
+  saveFrame("frames/"+version+"/"+version+"####.tif");  
 }
+
 void camara(){
   rotateX(camX);
   rotateY(camY);
   camZ-=0.005;
   rotateZ(camZ);
+}
+
+void mousePressed(){
+ 
+}
+
+void mouseReleased(){
+
 }
