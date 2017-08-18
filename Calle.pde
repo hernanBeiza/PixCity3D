@@ -14,7 +14,7 @@ class Calle extends Elemento {
   Calle(int index, int x, int y, int z, String direccion){
     super();
     
-    this.miColor = color(255,255,0);
+    this.miColor = color(0);
     
     this.index = index;
     this.x = x;

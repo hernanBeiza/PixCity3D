@@ -1,6 +1,6 @@
 import peasy.*;
 
-String version = "0.0.3";
+String version = "0.0.4";
 
 int cuadraAncho = 40;
 int cuadraAlto = 40;
@@ -68,7 +68,7 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(0);
   lights();
   camara();
   suelo.draw();
