@@ -6,12 +6,12 @@ class Calle extends Elemento {
   int z;
   
   int w;
+  int l;
   int h;
-  int d;
 
   String direccion;
 
-  Calle(int index, int x, int y, int z, String direccion){
+  Calle(int index, int x, int y, int z, int w, int l, String direccion){
     super();
     
     this.miColor = color(0);
@@ -22,9 +22,9 @@ class Calle extends Elemento {
     this.z = z;  
     this.direccion = direccion;
 
-    this.w = 10;
-    this.h = distancia;
-    this.d = 2;
+    this.w = w;
+    this.l = l;
+    this.h = 2;
     
   }
   
@@ -43,7 +43,8 @@ class Calle extends Elemento {
     //noFill();
     //stroke(miColor);
     
-    box(w,h,d);      
+    //box(w,l,h);
+    rect(0,0,w,l);
     popMatrix();
   }
   

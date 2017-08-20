@@ -1,99 +1,58 @@
 import peasy.*;
 
-String version = "0.0.4";
+String version = "0.0.5";
+
+int tamanoCiudad = 1000;
 
 int cuadraAncho = 40;
-int cuadraAlto = 40;
-
-int cuadraSeparador = 10;
+int cuadraLargo = 40;
+int cuadraSeparador = 20;
 
 PeasyCam cam;
 
-Suelo suelo;
+Ciudad ciudad;
+
 ArrayList <Calle> calles;
 
-ArrayList <Cuadra> cuadras;
-
-int distancia = 1000;
+int zoom = 100;
+int zoomMAX = 4000;
+int zoomMIN = 10;
 
 float camX = 1;
 float camY = 0.5;
 float camZ = 0;
 
+PFont font;
+
 void setup() {
-  size(600,600,P3D);
-  
-  cam = new PeasyCam(this, distancia);
-  cam.setMinimumDistance(10);
-  cam.setMaximumDistance(4000);
-  
-  suelo = new Suelo(0,0,0);
-  
-  int totalX = distancia/(cuadraAncho+cuadraSeparador);
-  int totalY = distancia/(cuadraAlto+cuadraSeparador);
-  
-  //println("totalX: " + totalX +" totalY: " + totalY);
-  calles = new ArrayList<Calle>();
-  int posZ = 2;
-  
-  for(int i = 0;i<totalX;i++){
-    int posX = (cuadraAncho+cuadraSeparador)*i-(distancia/2);
-    int posY = (cuadraAlto+cuadraSeparador)*i-(distancia/2);
+  size(600, 600, P3D);
 
-    Calle miCalle = new Calle(i,posX,0,posZ,"v");
-    Calle miCalle2 = new Calle(i,0,posY,posZ,"h");
+  cam = new PeasyCam(this, zoom);
+  cam.setMinimumDistance(zoomMIN);
+  cam.setMaximumDistance(zoomMAX);
 
-    calles.add(miCalle);
-    calles.add(miCalle2);
-  }
-  
-  //Cuadras
-  translate(cuadraSeparador,cuadraSeparador);
-  cuadras = new ArrayList<Cuadra>();
-  int indice = 0;
-  int iniX = -distancia/2+cuadraAncho/2+cuadraSeparador/2;
-  int iniY = -distancia/2+cuadraAlto/2+cuadraSeparador/2;
-  //println(iniX);
-  for(int i = 0;i<totalX;i++){
-    int posX = iniX+(cuadraAncho+cuadraSeparador)*i;
-    for(int j = 0;j<totalY;j++){
-      int posY = iniY+(cuadraAlto+cuadraSeparador)*j;
-      Cuadra miCuadra = new Cuadra(indice,posX,posY,posZ);
-      cuadras.add(miCuadra);    
-      indice++;
-    }
-    indice++;
-  }  
- 
+  font = loadFont("SansSerif-48.vlw");    
+
+  ciudad = new Ciudad(0, 0, 0,tamanoCiudad,tamanoCiudad);
 }
 
 void draw() {
   background(0);
   lights();
   camara();
-  suelo.draw();
-  for(int i = 0;i<calles.size();i++){
-    Calle miCalle = (Calle)calles.get(i);  
-    miCalle.draw();
-  } 
-  for(int i = 0;i<cuadras.size();i++){
-    Cuadra miCuadra = (Cuadra)cuadras.get(i);  
-    miCuadra.draw();
-  }
-  saveFrame("frames/"+version+"/"+version+"####.tif");  
+  ciudad.draw();
+  //saveFrame("frames/"+version+"/"+version+"####.tif");
 }
 
-void camara(){
+void camara() {
   rotateX(camX);
   rotateY(camY);
   camZ-=0.005;
   rotateZ(camZ);
 }
 
-void mousePressed(){
- 
+void mousePressed() {
 }
 
-void mouseReleased(){
-
+void mouseReleased() {
 }

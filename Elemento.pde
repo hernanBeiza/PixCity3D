@@ -4,14 +4,11 @@ class Elemento{
   PVector miVectorY;
   PVector miVectorZ;
   
-  int largo = 100;
+  int largo = 300;
 
   color miColor = color(0);
   
   Elemento(){
-    //distancia, variable en main
-    largo += distancia;
-    
     miVectorX = new PVector(1,0,0);
     miVectorY = new PVector(0,1,0);
     miVectorZ = this.miVectorX.cross(miVectorY);
